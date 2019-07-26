@@ -1,6 +1,6 @@
 baseurl = "https://example.com/"
 title = "Whiteplain"
-theme = "whiteplain"
+theme = ["whiteplain"]
 languageCode = "en"
 # Disqus shortname
 disqusShortname = "Shortname"
