@@ -1,4 +1,4 @@
-baseurl = "http://bwarren2.github.io/betteraws/"
+baseurl = "https://bwarren2.github.io/betteraws/"
 publishDir = "docs"
 title = "Whiteplain"
 theme = ["whiteplain"]
