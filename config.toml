@@ -1,4 +1,5 @@
-baseurl = "https://example.com/"
+baseurl = "bwarren2.github.io/betteraws/"
+publishDir = "docs"
 title = "Whiteplain"
 theme = ["whiteplain"]
 languageCode = "en"
