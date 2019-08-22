@@ -2,13 +2,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Whiteplain</title>
-    <link>https://bwarren2.github.io/tags/</link>
+    <link>https://bwarren2.github.io/betteraws/tags/</link>
     <description>Recent content in Tags on Whiteplain</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; Copyright 2017 Your name</copyright>
     
-	<atom:link href="https://bwarren2.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bwarren2.github.io/betteraws/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
   </channel>
