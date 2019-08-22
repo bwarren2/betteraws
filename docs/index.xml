@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Whiteplain</title>
+    <link>bwarren2.github.io/betteraws/</link>
+    <description>Recent content on Whiteplain</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>&amp;copy; Copyright 2017 Your name</copyright>
+    <lastBuildDate>Mon, 22 Jul 2019 13:37:04 -0400</lastBuildDate>
+    
+	<atom:link href="bwarren2.github.io/betteraws/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Getting Started</title>
+      <link>bwarren2.github.io/betteraws/getting_started/</link>
+      <pubDate>Mon, 22 Jul 2019 13:37:04 -0400</pubDate>
+      
+      <guid>bwarren2.github.io/betteraws/getting_started/</guid>
+      <description>Making an account Go make an AWS account. This will set you up with an AWS account and a root account user. The credentials for this user should be super secure, and very rarely used. Most of the things you need the root user account to do involve billing/payment, and are done at most infrequently.
+Making a user for administration Make an IAM user, assign it to the Admin group.</description>
+    </item>
+    
+  </channel>
+</rss>
