@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>Iam - Whiteplain</title>
+  <meta property="og:title" content="Iam - Whiteplain" />
+  <meta name="twitter:title" content="Iam - Whiteplain" />
+  <meta name="description" content="TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
+Create a user Invocations to the aws cli are of the form aws &lt;service&gt; &lt;action&gt; --arg1 value1 --arg2 value2 .... In this case:
+aws iam create-user --user-name s3user
+if you are storing credentials via profiles and want to use one of those, you might invoke this instead as">
+  <meta property="og:description" content="TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
+Create a user Invocations to the aws cli are of the form aws &lt;service&gt; &lt;action&gt; --arg1 value1 --arg2 value2 .... In this case:
+aws iam create-user --user-name s3user
+if you are storing credentials via profiles and want to use one of those, you might invoke this instead as">
+  <meta name="twitter:description" content="TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
+Create a user …">
+  <meta name="author" content="Your name"/>
+  <meta property="og:site_name" content="Whiteplain" />
+  <meta property="og:url" content="https://bwarren2.github.io/betteraws/iam/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.55.6" />
+
+  <link rel="stylesheet" href="/betteraws/css/style.css" media="all" />
+  <link rel="stylesheet" href="/betteraws/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/betteraws/css/custom.css" media="all" />
+
+  <script src="/betteraws/js/script.js"></script>
+  <script src="/betteraws/js/custom.js"></script>
+  <script defer src="/betteraws/js/fontawesome.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/betteraws/">Whiteplain</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/betteraws/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-tags"><a href="/betteraws/tags/" title="Tags">Tags</a></li>
+      <li class="site-navi-item-archives"><a href="/betteraws/archives/" title="Archives">Archives</a></li>
+      <li class="site-navi-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">Iam</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>August 14, 2019</time></li>
+      </ul>
+      
+<aside class="toc">
+  <nav id="TableOfContents">
+<ul>
+<li><a href="#tldr">TLDR</a></li>
+<li><a href="#what-is-iam">What is IAM?</a></li>
+<li><a href="#create-a-user">Create a user</a></li>
+<li><a href="#give-a-user-access-keys">Give a user access keys</a></li>
+<li><a href="#check-the-user-works">Check the user works</a></li>
+<li><a href="#user-permissions">User Permissions</a>
+<ul>
+<li><a href="#create-a-policy">Create a policy</a></li>
+<li><a href="#attach-it-to-the-user">Attach it to the user</a></li>
+<li><a href="#or-create-attach-directly">Or create + attach directly</a></li>
+<li><a href="#check-that-the-policy-is-there">Check that the policy is there</a></li>
+</ul></li>
+<li><a href="#demonstrate-that-the-policy-works">Demonstrate that the policy works</a></li>
+</ul>
+</nav>
+</aside>
+      
+
+<h1 id="tldr">TLDR</h1>
+
+<ul>
+<li><a href="https://docs.aws.amazon.com/iam/index.html">Purported Docs</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/iam/">CLI Docs</a></li>
+</ul>
+
+<h1 id="what-is-iam">What is IAM?</h1>
+
+<p>IAM is Identity and Access Management.  It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.</p>
+
+<h1 id="create-a-user">Create a user</h1>
+
+<p>Invocations to the aws cli are of the form <code>aws &lt;service&gt; &lt;action&gt; --arg1 value1 --arg2 value2 ...</code>.  In this case:</p>
+
+<p><code>aws iam create-user --user-name s3user</code></p>
+
+<p>if you are storing credentials via profiles and want to use one of those, you might invoke this instead as</p>
+
+<p><code>aws iam create-user --user-name s3user --profile betteraws</code>.</p>
+
+<p>The output looks like:</p>
+
+<pre><code>{
+    &quot;User&quot;: {
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;UserName&quot;: &quot;s3user&quot;,
+        &quot;UserId&quot;: &quot;AIDA...&quot;,
+        &quot;Arn&quot;: &quot;arn:aws:iam::87...:user/s3user&quot;,
+        &quot;CreateDate&quot;: &quot;2019-08-14T23:45:26Z&quot;
+    }
+}
+</code></pre>
+
+<p>You have a user!  🎉</p>
+
+<h1 id="give-a-user-access-keys">Give a user access keys</h1>
+
+<p>Running</p>
+
+<p><code>aws iam create-access-key --user-name s3user --profile betteraws</code></p>
+
+<p>generates output like</p>
+
+<pre><code>{
+    &quot;AccessKey&quot;: {
+        &quot;UserName&quot;: &quot;s3user&quot;,
+        &quot;AccessKeyId&quot;: &quot;AKIA...&quot;,
+        &quot;Status&quot;: &quot;Active&quot;,
+        &quot;SecretAccessKey&quot;: &quot;6h/...&quot;,
+        &quot;CreateDate&quot;: &quot;2019-08-14T23:52:53Z&quot;
+    }
+}
+</code></pre>
+
+<p>adding this information to your credentials and config in <code>~/.aws</code> will allow you to act as this user when using the CLI.</p>
+
+<p>You might have a <strong>~/.aws/config</strong> like:</p>
+
+<pre><code>[profile s3user]
+region = us-east-1
+output = json
+</code></pre>
+
+<p>and a <strong>~/.aws/credentials</strong> like:</p>
+
+<pre><code>
+[s3user]
+aws_access_key_id = AKIA...
+aws_secret_access_key = x8D...
+</code></pre>
+
+<p>Note that the names of the two blocks are the same (s3user).  Broadly, <code>~/.aws/config</code> is for preferences like default zone.  <code>~/.aws/credentials</code> is for access keys.  <strong>NOTE:</strong> Access keys and UserIds are different.  Access keys start with AKIA.</p>
+
+<h1 id="check-the-user-works">Check the user works</h1>
+
+<p>As last time, call the Secure Token Service:</p>
+
+<p><code>aws sts get-caller-identity --profile s3user</code></p>
+
+<p>(Output:)</p>
+
+<pre><code>{
+    &quot;UserId&quot;: &quot;AIDA...&quot;,
+    &quot;Account&quot;: &quot;871...&quot;,
+    &quot;Arn&quot;: &quot;arn:aws:iam::871...:user/s3user&quot;
+}
+</code></pre>
+
+<p>🙌</p>
+
+<p>You can set which profile will be used when you don&rsquo;t specify one with the AWS_DEFAULT_PROFILE env var.</p>
+
+<h1 id="user-permissions">User Permissions</h1>
+
+<p>New users don&rsquo;t have permission to do anything; you must give them permission with policies.  You can see the lack of policies with:</p>
+
+<pre><code>$ aws iam list-user-policies --user-name s3user
+
+{
+    &quot;PolicyNames&quot;: []
+}
+
+</code></pre>
+
+<p>and demonstrate a lack of permissions with</p>
+
+<pre><code>$ aws s3 ls --profile s3user
+
+An error occurred (AccessDenied) when calling the ListBuckets operation: Access Denied
+[betteraws](master)$
+</code></pre>
+
+<h2 id="create-a-policy">Create a policy</h2>
+
+<p>With a file like this:</p>
+
+<pre><code>{
+  &quot;Version&quot;:&quot;2012-10-17&quot;,
+  &quot;Statement&quot;:[
+    {
+      &quot;Sid&quot;:&quot;AddPerm&quot;,
+      &quot;Effect&quot;:&quot;Allow&quot;,
+      &quot;Principal&quot;: &quot;*&quot;,
+      &quot;Action&quot;:[&quot;s3:GetObject&quot;],
+      &quot;Resource&quot;:[&quot;arn:aws:s3:::examplebucket/*&quot;]
+    }
+  ]
+}
+</code></pre>
+
+<p>Create a policy you can assign to users with</p>
+
+<pre><code>$ aws iam create-policy --policy-name AllS32 --policy-document file://all-s3
+{
+    &quot;Policy&quot;: {
+        &quot;PolicyName&quot;: &quot;AllS32&quot;,
+        &quot;PolicyId&quot;: &quot;ANPA...&quot;,
+        &quot;Arn&quot;: &quot;arn:aws:iam::871...:policy/AllS32&quot;,
+        &quot;Path&quot;: &quot;/&quot;,
+        &quot;DefaultVersionId&quot;: &quot;v1&quot;,
+        &quot;AttachmentCount&quot;: 0,
+        &quot;PermissionsBoundaryUsageCount&quot;: 0,
+        &quot;IsAttachable&quot;: true,
+        &quot;CreateDate&quot;: &quot;2019-08-15T01:11:08Z&quot;,
+        &quot;UpdateDate&quot;: &quot;2019-08-15T01:11:08Z&quot;
+    }
+}
+</code></pre>
+
+<h2 id="attach-it-to-the-user">Attach it to the user</h2>
+
+<p><code>$ aws iam attach-user-policy --policy-arn arn:aws:iam::871...:policy/AllS32 --user-name s3user</code></p>
+
+<h2 id="or-create-attach-directly">Or create + attach directly</h2>
+
+<p><code>$ aws iam put-user-policy --policy-name AllS3 --user-name s3user --policy-document file://all-s3</code></p>
+
+<h2 id="check-that-the-policy-is-there">Check that the policy is there</h2>
+
+<p>See a user&rsquo;s policies with:</p>
+
+<pre><code>$ aws iam list-user-policies --user-name s3user
+{
+    &quot;PolicyNames&quot;: [
+        &quot;AllS3&quot;
+    ]
+}
+</code></pre>
+
+<p><strong>But wait!</strong> This user should have two policies on them, because we ran both of the above.  What gives?</p>
+
+<p>I wasted 30 minutes on this so you don&rsquo;t have to.  AWS has two different calls for finding policies for a user: one for the intrinsic policies (like the above,) and one for attached policies:</p>
+
+<pre><code>$ aws iam list-attached-user-policies --user-name s3user
+{
+    &quot;AttachedPolicies&quot;: [
+        {
+            &quot;PolicyName&quot;: &quot;AllS32&quot;,
+            &quot;PolicyArn&quot;: &quot;arn:aws:iam::871....:policy/AllS32&quot;
+        }
+    ]
+}
+</code></pre>
+
+<h1 id="demonstrate-that-the-policy-works">Demonstrate that the policy works</h1>
+
+<p>We&rsquo;ll cover more on s3 next, but this command makes a bucket.  (Note the <code>s3://</code>)</p>
+
+<pre><code>$ aws s3 mb s3://betteraws-test --profile s3user
+make_bucket: betteraws-test
+</code></pre>
+
+<p>Now check that the bucket exists.</p>
+
+<pre><code>$ aws s3 ls --profile s3user
+2019-08-21 20:57:20 betteraws-test
+</code></pre>
+
+<p>💪</p>
+
+    </article>
+
+    
+<ul class="article-share">
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+  <li>
+    <div class="fb-share-button" data-href="https://bwarren2.github.io/betteraws/iam/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </li>
+  <li>
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </li>
+  <li>
+    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+  </li>
+</ul>
+
+    <div class="disqus-comments">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    <ul class="pager article-pager">
+      <li class="pager-newer pager-noitem">&lt; Newer</li>
+      <li class="pager-older">
+        <a href="/betteraws/getting_started/" data-toggle="tooltip" data-placement="top" title="Getting Started">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright">&copy; Copyright 2017 Your name</div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
+  </div>
+</div>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'Toracking ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+</html>
