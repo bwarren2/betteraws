@@ -1,7 +1,7 @@
 ---
 title: "Iam"
 date: 2019-08-14T19:38:47-04:00
-draft: true
+draft: false
 ---
 
 # TLDR
