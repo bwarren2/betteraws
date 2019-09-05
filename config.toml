@@ -1,4 +1,4 @@
-baseurl = "https://bwarren2.github.io/betteraws"
+baseurl = "https://bwarren2.github.io/betteraws/"
 canonifyurls = true
 publishDir = "docs"
 title = "Whiteplain"

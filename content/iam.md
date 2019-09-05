@@ -214,3 +214,7 @@ $ aws s3 ls --profile s3user
 ```
 
 💪
+
+## Understanding IAM policies and roles.
+
+[This summary](https://start.jcolemorrison.com/aws-iam-policies-in-a-nutshell/) is good.  Notably, it is called "IAM Confused".
