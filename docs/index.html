@@ -42,6 +42,21 @@
   <div class="main" role="main">
     <section class="list home-list">
       <article class="article">
+        <a href="https://bwarren2.github.io/betteraws/s3_2/" class="article-titles">
+          <h2 class="article-title">S3, Part 2</h2>
+          
+        </a>
+        <ul class="article-meta">
+          <li class="article-meta-date"><time>September 4, 2019</time></li>
+        </ul>
+        <div class="article-content">
+          TLDR, This Section Advanced Operations  Purported Docs CLI Docs  Rehashing You can redo the operations from last time with the expanded toolkit of aws s3api, but there are more flags to manage. For example, to put an object onto s3:
+$ aws s3api create-bucket --bucket betteraws-more-cat-gifs { &quot;Location&quot;: &quot;/betteraws-more-cat-gifs&quot; } $ aws s3api list-objects --bucket betteraws-more-cat-gifs $ aws s3api put-object --bucket betteraws-more-cat-gifs --key more-shaq.gif --body cat-shaq-wiggles.gif { &quot;ETag&quot;: &quot;\&quot;1ec35ab1efd1d8fada033cb5ab546d66\&quot;&quot; } $ aws s3api list-objects --bucket betteraws-more-cat-gifs { &quot;Contents&quot;: [ { &quot;Key&quot;: &quot;more-shaq.
+        </div>
+        <div class="article-readmore"><a href="https://bwarren2.github.io/betteraws/s3_2/">Read more...</a></div>
+        <div class="article-floatclear"></div>
+      </article>
+      <article class="article">
         <a href="https://bwarren2.github.io/betteraws/s3/" class="article-titles">
           <h2 class="article-title">S3, Part 1</h2>
           

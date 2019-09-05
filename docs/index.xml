@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; Copyright 2017 Your name</copyright>
-    <lastBuildDate>Wed, 21 Aug 2019 21:36:56 -0400</lastBuildDate>
+    <lastBuildDate>Wed, 04 Sep 2019 20:47:08 -0400</lastBuildDate>
     
 	<atom:link href="https://bwarren2.github.io/betteraws/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>S3, Part 2</title>
+      <link>https://bwarren2.github.io/betteraws/s3_2/</link>
+      <pubDate>Wed, 04 Sep 2019 20:47:08 -0400</pubDate>
+      
+      <guid>https://bwarren2.github.io/betteraws/s3_2/</guid>
+      <description>TLDR, This Section Advanced Operations  Purported Docs CLI Docs  Rehashing You can redo the operations from last time with the expanded toolkit of aws s3api, but there are more flags to manage. For example, to put an object onto s3:
+$ aws s3api create-bucket --bucket betteraws-more-cat-gifs { &amp;quot;Location&amp;quot;: &amp;quot;/betteraws-more-cat-gifs&amp;quot; } $ aws s3api list-objects --bucket betteraws-more-cat-gifs $ aws s3api put-object --bucket betteraws-more-cat-gifs --key more-shaq.gif --body cat-shaq-wiggles.gif { &amp;quot;ETag&amp;quot;: &amp;quot;\&amp;quot;1ec35ab1efd1d8fada033cb5ab546d66\&amp;quot;&amp;quot; } $ aws s3api list-objects --bucket betteraws-more-cat-gifs { &amp;quot;Contents&amp;quot;: [ { &amp;quot;Key&amp;quot;: &amp;quot;more-shaq.</description>
+    </item>
     
     <item>
       <title>S3, Part 1</title>
