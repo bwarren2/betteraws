@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <title>IAM - Whiteplain</title>
-  <meta property="og:title" content="IAM - Whiteplain" />
-  <meta name="twitter:title" content="IAM - Whiteplain" />
+  <title>IAM - Better AWS Docs</title>
+  <meta property="og:title" content="IAM - Better AWS Docs" />
+  <meta name="twitter:title" content="IAM - Better AWS Docs" />
   <meta name="description" content="TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
 Create a user Invocations to the aws cli are of the form aws &lt;service&gt; &lt;action&gt; --arg1 value1 --arg2 value2 .... In this case:
 aws iam create-user --user-name s3user
@@ -17,31 +17,31 @@ if you are storing credentials via profiles and want to use one of those, you mi
   <meta name="twitter:description" content="TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
 Create a user …">
   <meta name="author" content="Your name"/>
-  <meta property="og:site_name" content="Whiteplain" />
-  <meta property="og:url" content="https://bwarren2.github.io/betteraws/iam/" />
+  <meta property="og:site_name" content="Better AWS Docs" />
+  <meta property="og:url" content="https://bwarren2.github.io/iam/" />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.55.6" />
 
-  <link rel="stylesheet" href="/betteraws/css/style.css" media="all" />
-  <link rel="stylesheet" href="/betteraws/css/syntax.css" media="all" />
-  <link rel="stylesheet" href="/betteraws/css/custom.css" media="all" />
+  <link rel="stylesheet" href="https://bwarren2.github.io/css/style.css" media="all" />
+  <link rel="stylesheet" href="https://bwarren2.github.io/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="https://bwarren2.github.io/css/custom.css" media="all" />
 
-  <script src="/betteraws/js/script.js"></script>
-  <script src="/betteraws/js/custom.js"></script>
-  <script defer src="/betteraws/js/fontawesome.js"></script>
+  <script src="https://bwarren2.github.io/js/script.js"></script>
+  <script src="https://bwarren2.github.io/js/custom.js"></script>
+  <script defer src="https://bwarren2.github.io/js/fontawesome.js"></script>
 </head>
 
 <body>
 
 <header class="site-header">
   <nav class="site-navi">
-    <h1 class="site-title"><a href="/betteraws/">Whiteplain</a></h1>
+    <h1 class="site-title"><a href="https://bwarren2.github.io/">Better AWS Docs</a></h1>
     <ul class="site-navi-items">
-      <li class="site-navi-item-categories"><a href="/betteraws/categories/" title="Categories">Categories</a></li>
-      <li class="site-navi-item-tags"><a href="/betteraws/tags/" title="Tags">Tags</a></li>
-      <li class="site-navi-item-archives"><a href="/betteraws/archives/" title="Archives">Archives</a></li>
-      <li class="site-navi-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+      <li class="site-navi-item-categories"><a href="https://bwarren2.github.io/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-tags"><a href="https://bwarren2.github.io/tags/" title="Tags">Tags</a></li>
+      <li class="site-navi-item-archives"><a href="https://bwarren2.github.io/archives/" title="Archives">Archives</a></li>
+      <li class="site-navi-item-about"><a href="https://bwarren2.github.io/about/" title="About">About</a></li>
     </ul>
   </nav>
 </header>
@@ -73,7 +73,10 @@ Create a user …">
 <li><a href="#or-create-attach-directly">Or create + attach directly</a></li>
 <li><a href="#check-that-the-policy-is-there">Check that the policy is there</a></li>
 </ul></li>
-<li><a href="#demonstrate-that-the-policy-works">Demonstrate that the policy works</a></li>
+<li><a href="#demonstrate-that-the-policy-works">Demonstrate that the policy works</a>
+<ul>
+<li><a href="#understanding-iam-policies-and-roles">Understanding IAM policies and roles.</a></li>
+</ul></li>
 </ul>
 </nav>
 </aside>
@@ -279,6 +282,10 @@ make_bucket: betteraws-test
 
 <p>💪</p>
 
+<h2 id="understanding-iam-policies-and-roles">Understanding IAM policies and roles.</h2>
+
+<p><a href="https://start.jcolemorrison.com/aws-iam-policies-in-a-nutshell/">This summary</a> is good.  Notably, it is called &ldquo;IAM Confused&rdquo;.</p>
+
     </article>
 
     
@@ -287,7 +294,7 @@ make_bucket: betteraws-test
     <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </li>
   <li>
-    <div class="fb-share-button" data-href="https://bwarren2.github.io/betteraws/iam/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div class="fb-share-button" data-href="https://bwarren2.github.io/iam/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -331,10 +338,10 @@ make_bucket: betteraws-test
 
     <ul class="pager article-pager">
       <li class="pager-newer">
-          <a href="/betteraws/s3/" data-toggle="tooltip" data-placement="top" title="S3, Pt 1">&lt; Newer</a>
+          <a href="https://bwarren2.github.io/s3/" data-toggle="tooltip" data-placement="top" title="S3, Part 1">&lt; Newer</a>
       </li>
       <li class="pager-older">
-        <a href="/betteraws/getting_started/" data-toggle="tooltip" data-placement="top" title="Getting Started">Older &gt;</a>
+        <a href="https://bwarren2.github.io/getting_started/" data-toggle="tooltip" data-placement="top" title="Getting Started">Older &gt;</a>
       </li>
     </ul>
   </div>
@@ -343,7 +350,7 @@ make_bucket: betteraws-test
 <div class="site-footer">
   <div class="copyright">&copy; Copyright 2017 Your name</div>
   <ul class="site-footer-items">
-    <li class="site-footer-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+    <li class="site-footer-item-about"><a href="https://bwarren2.github.io/about/" title="About">About</a></li>
   </ul>
   <div class="powerdby">
     Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>

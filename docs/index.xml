@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Whiteplain</title>
-    <link>https://bwarren2.github.io/betteraws/</link>
-    <description>Recent content on Whiteplain</description>
+    <title>Better AWS Docs</title>
+    <link>https://bwarren2.github.io/</link>
+    <description>Recent content on Better AWS Docs</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>&amp;copy; Copyright 2017 Your name</copyright>
     <lastBuildDate>Wed, 21 Aug 2019 21:36:56 -0400</lastBuildDate>
     
-	<atom:link href="https://bwarren2.github.io/betteraws/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://bwarren2.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>S3, Pt 1</title>
-      <link>https://bwarren2.github.io/betteraws/s3/</link>
+      <title>S3, Part 1</title>
+      <link>https://bwarren2.github.io/s3/</link>
       <pubDate>Wed, 21 Aug 2019 21:36:56 -0400</pubDate>
       
-      <guid>https://bwarren2.github.io/betteraws/s3/</guid>
+      <guid>https://bwarren2.github.io/s3/</guid>
       <description>TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way to do things, there are three different s3 cli namespaces. Broadly, they are:
  Analogues of the basic unix operations, like cp, ls, rm, mv, and create/delete bucket. Everything else supported for s3 stuff, like acl policies, inventory policies, cors, encryption, etc.</description>
     </item>
     
     <item>
       <title>IAM</title>
-      <link>https://bwarren2.github.io/betteraws/iam/</link>
+      <link>https://bwarren2.github.io/iam/</link>
       <pubDate>Wed, 14 Aug 2019 19:38:47 -0400</pubDate>
       
-      <guid>https://bwarren2.github.io/betteraws/iam/</guid>
+      <guid>https://bwarren2.github.io/iam/</guid>
       <description>TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&amp;rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
 Create a user Invocations to the aws cli are of the form aws &amp;lt;service&amp;gt; &amp;lt;action&amp;gt; --arg1 value1 --arg2 value2 .... In this case:
 aws iam create-user --user-name s3user
@@ -36,10 +36,10 @@ if you are storing credentials via profiles and want to use one of those, you mi
     
     <item>
       <title>Getting Started</title>
-      <link>https://bwarren2.github.io/betteraws/getting_started/</link>
+      <link>https://bwarren2.github.io/getting_started/</link>
       <pubDate>Mon, 22 Jul 2019 13:37:04 -0400</pubDate>
       
-      <guid>https://bwarren2.github.io/betteraws/getting_started/</guid>
+      <guid>https://bwarren2.github.io/getting_started/</guid>
       <description>Making an account Go make an AWS account. This will set you up with an AWS account and a root account user. The credentials for this user should be super secure, and very rarely used. Most of the things you need the root user account to do involve billing/payment, and are done at most infrequently.
 Making a user for administration Make an IAM user, assign it to the Admin group.</description>
     </item>

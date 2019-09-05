@@ -3,40 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <title>S3, Pt 1 - Whiteplain</title>
-  <meta property="og:title" content="S3, Pt 1 - Whiteplain" />
-  <meta name="twitter:title" content="S3, Pt 1 - Whiteplain" />
+  <title>S3, Part 1 - Better AWS Docs</title>
+  <meta property="og:title" content="S3, Part 1 - Better AWS Docs" />
+  <meta name="twitter:title" content="S3, Part 1 - Better AWS Docs" />
   <meta name="description" content="TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way to do things, there are three different s3 cli namespaces. Broadly, they are:
  Analogues of the basic unix operations, like cp, ls, rm, mv, and create/delete bucket. Everything else supported for s3 stuff, like acl policies, inventory policies, cors, encryption, etc.">
   <meta property="og:description" content="TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way to do things, there are three different s3 cli namespaces. Broadly, they are:
  Analogues of the basic unix operations, like cp, ls, rm, mv, and create/delete bucket. Everything else supported for s3 stuff, like acl policies, inventory policies, cors, encryption, etc.">
   <meta name="twitter:description" content="TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way …">
   <meta name="author" content="Your name"/>
-  <meta property="og:site_name" content="Whiteplain" />
-  <meta property="og:url" content="https://bwarren2.github.io/betteraws/s3/" />
+  <meta property="og:site_name" content="Better AWS Docs" />
+  <meta property="og:url" content="https://bwarren2.github.io/s3/" />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary" />
   <meta name="generator" content="Hugo 0.55.6" />
 
-  <link rel="stylesheet" href="/betteraws/css/style.css" media="all" />
-  <link rel="stylesheet" href="/betteraws/css/syntax.css" media="all" />
-  <link rel="stylesheet" href="/betteraws/css/custom.css" media="all" />
+  <link rel="stylesheet" href="https://bwarren2.github.io/css/style.css" media="all" />
+  <link rel="stylesheet" href="https://bwarren2.github.io/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="https://bwarren2.github.io/css/custom.css" media="all" />
 
-  <script src="/betteraws/js/script.js"></script>
-  <script src="/betteraws/js/custom.js"></script>
-  <script defer src="/betteraws/js/fontawesome.js"></script>
+  <script src="https://bwarren2.github.io/js/script.js"></script>
+  <script src="https://bwarren2.github.io/js/custom.js"></script>
+  <script defer src="https://bwarren2.github.io/js/fontawesome.js"></script>
 </head>
 
 <body>
 
 <header class="site-header">
   <nav class="site-navi">
-    <h1 class="site-title"><a href="/betteraws/">Whiteplain</a></h1>
+    <h1 class="site-title"><a href="https://bwarren2.github.io/">Better AWS Docs</a></h1>
     <ul class="site-navi-items">
-      <li class="site-navi-item-categories"><a href="/betteraws/categories/" title="Categories">Categories</a></li>
-      <li class="site-navi-item-tags"><a href="/betteraws/tags/" title="Tags">Tags</a></li>
-      <li class="site-navi-item-archives"><a href="/betteraws/archives/" title="Archives">Archives</a></li>
-      <li class="site-navi-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+      <li class="site-navi-item-categories"><a href="https://bwarren2.github.io/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-tags"><a href="https://bwarren2.github.io/tags/" title="Tags">Tags</a></li>
+      <li class="site-navi-item-archives"><a href="https://bwarren2.github.io/archives/" title="Archives">Archives</a></li>
+      <li class="site-navi-item-about"><a href="https://bwarren2.github.io/about/" title="About">About</a></li>
     </ul>
   </nav>
 </header>
@@ -46,7 +46,7 @@
     <article class="article">
       
       
-      <h1 class="article-title">S3, Pt 1</h1>
+      <h1 class="article-title">S3, Part 1</h1>
       
       <hr class="article-title-bottom">
       <ul class="article-meta">
@@ -96,7 +96,7 @@
 
 <p>In the spirit of the internet, our examples will all be moving cat gifs across the web.  Specifically, <code>cat-shaq-wiggles.gif</code>:</p>
 
-<p><img src="/cat-shaq-wiggles.gif" /></p>
+<p><img src="https://bwarren2.github.io/cat-shaq-wiggles.gif" /></p>
 
 <h2 id="make-a-bucket">Make a bucket</h2>
 
@@ -136,7 +136,7 @@ move: ./cat-shaq-wiggles.gif to s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
 fatal error: An error occurred (404) when calling the HeadObject operation: Key &quot;cat-shaq-wiggles&quot; does not exist
 </code></pre>
 
-<p>The suffix is necessary on cp, so:</p>
+<p>The suffix is necessary when <code>cp</code>ing something down, so:</p>
 
 <pre><code>aws s3 cp s3://betteraws-cat-gifs/cat-shaq-wiggles.gif .
 download: s3://betteraws-cat-gifs/cat-shaq-wiggles.gif to ./cat-shaq-wiggles.gif
@@ -158,11 +158,11 @@ delete: s3://betteraws-cat-gifs/cat-shaq-wiggles
 
 <p>While the delete <em>looks</em> like it succeeded, it definitely did not.  Actually get rid of it:</p>
 
-<p><code>
-$ aws s3 rm s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
+<pre><code>$ aws s3 rm s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
 delete: s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
 $ aws s3 ls s3://betteraws-cat-gifs
-$</code></p>
+$
+</code></pre>
 
 <p>Why does the <code>cp</code> complain about a missing key, but the delete happily act like nothing is wrong?  Probably concurrency or something.  AWS is full of these kinds of behaviors to stub your toe on, so watch out.</p>
 
@@ -174,7 +174,7 @@ $</code></p>
     <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
   </li>
   <li>
-    <div class="fb-share-button" data-href="https://bwarren2.github.io/betteraws/s3/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div class="fb-share-button" data-href="https://bwarren2.github.io/s3/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
     <div id="fb-root"></div>
     <script>(function(d, s, id) {
       var js, fjs = d.getElementsByTagName(s)[0];
@@ -219,7 +219,7 @@ $</code></p>
     <ul class="pager article-pager">
       <li class="pager-newer pager-noitem">&lt; Newer</li>
       <li class="pager-older">
-        <a href="/betteraws/iam/" data-toggle="tooltip" data-placement="top" title="IAM">Older &gt;</a>
+        <a href="https://bwarren2.github.io/iam/" data-toggle="tooltip" data-placement="top" title="IAM">Older &gt;</a>
       </li>
     </ul>
   </div>
@@ -228,7 +228,7 @@ $</code></p>
 <div class="site-footer">
   <div class="copyright">&copy; Copyright 2017 Your name</div>
   <ul class="site-footer-items">
-    <li class="site-footer-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+    <li class="site-footer-item-about"><a href="https://bwarren2.github.io/about/" title="About">About</a></li>
   </ul>
   <div class="powerdby">
     Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
