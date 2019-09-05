@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-  <title>Iam - Whiteplain</title>
-  <meta property="og:title" content="Iam - Whiteplain" />
-  <meta name="twitter:title" content="Iam - Whiteplain" />
+  <title>IAM - Whiteplain</title>
+  <meta property="og:title" content="IAM - Whiteplain" />
+  <meta name="twitter:title" content="IAM - Whiteplain" />
   <meta name="description" content="TLDR  Purported Docs CLI Docs  What is IAM? IAM is Identity and Access Management. It&rsquo;s used for managing users, groups, and roles, in the service of controlling permissions.
 Create a user Invocations to the aws cli are of the form aws &lt;service&gt; &lt;action&gt; --arg1 value1 --arg2 value2 .... In this case:
 aws iam create-user --user-name s3user
@@ -51,7 +51,7 @@ Create a user …">
     <article class="article">
       
       
-      <h1 class="article-title">Iam</h1>
+      <h1 class="article-title">IAM</h1>
       
       <hr class="article-title-bottom">
       <ul class="article-meta">
@@ -170,7 +170,7 @@ aws_secret_access_key = x8D...
 
 <p>🙌</p>
 
-<p>You can set which profile will be used when you don&rsquo;t specify one with the AWS_DEFAULT_PROFILE env var.</p>
+<p>You can set which profile will be used when you don&rsquo;t specify one with the <code>AWS_DEFAULT_PROFILE</code> env var.</p>
 
 <h1 id="user-permissions">User Permissions</h1>
 
@@ -189,7 +189,6 @@ aws_secret_access_key = x8D...
 <pre><code>$ aws s3 ls --profile s3user
 
 An error occurred (AccessDenied) when calling the ListBuckets operation: Access Denied
-[betteraws](master)$
 </code></pre>
 
 <h2 id="create-a-policy">Create a policy</h2>
@@ -331,7 +330,9 @@ make_bucket: betteraws-test
     </div>
 
     <ul class="pager article-pager">
-      <li class="pager-newer pager-noitem">&lt; Newer</li>
+      <li class="pager-newer">
+          <a href="/betteraws/s3/" data-toggle="tooltip" data-placement="top" title="S3, Pt 1">&lt; Newer</a>
+      </li>
       <li class="pager-older">
         <a href="/betteraws/getting_started/" data-toggle="tooltip" data-placement="top" title="Getting Started">Older &gt;</a>
       </li>

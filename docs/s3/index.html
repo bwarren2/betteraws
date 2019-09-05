@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <title>S3, Pt 1 - Whiteplain</title>
+  <meta property="og:title" content="S3, Pt 1 - Whiteplain" />
+  <meta name="twitter:title" content="S3, Pt 1 - Whiteplain" />
+  <meta name="description" content="TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way to do things, there are three different s3 cli namespaces. Broadly, they are:
+ Analogues of the basic unix operations, like cp, ls, rm, mv, and create/delete bucket. Everything else supported for s3 stuff, like acl policies, inventory policies, cors, encryption, etc.">
+  <meta property="og:description" content="TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way to do things, there are three different s3 cli namespaces. Broadly, they are:
+ Analogues of the basic unix operations, like cp, ls, rm, mv, and create/delete bucket. Everything else supported for s3 stuff, like acl policies, inventory policies, cors, encryption, etc.">
+  <meta name="twitter:description" content="TLDR Basic Operations  Purported Docs CLI Docs  Advanced Operations  Purported Docs CLI Docs  Job Operations  Purported Docs CLI Docs  Intro In the spirit of there being one, and only one, right way …">
+  <meta name="author" content="Your name"/>
+  <meta property="og:site_name" content="Whiteplain" />
+  <meta property="og:url" content="https://bwarren2.github.io/betteraws/s3/" />
+  <meta property="og:type" content="article" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="generator" content="Hugo 0.55.6" />
+
+  <link rel="stylesheet" href="/betteraws/css/style.css" media="all" />
+  <link rel="stylesheet" href="/betteraws/css/syntax.css" media="all" />
+  <link rel="stylesheet" href="/betteraws/css/custom.css" media="all" />
+
+  <script src="/betteraws/js/script.js"></script>
+  <script src="/betteraws/js/custom.js"></script>
+  <script defer src="/betteraws/js/fontawesome.js"></script>
+</head>
+
+<body>
+
+<header class="site-header">
+  <nav class="site-navi">
+    <h1 class="site-title"><a href="/betteraws/">Whiteplain</a></h1>
+    <ul class="site-navi-items">
+      <li class="site-navi-item-categories"><a href="/betteraws/categories/" title="Categories">Categories</a></li>
+      <li class="site-navi-item-tags"><a href="/betteraws/tags/" title="Tags">Tags</a></li>
+      <li class="site-navi-item-archives"><a href="/betteraws/archives/" title="Archives">Archives</a></li>
+      <li class="site-navi-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+    </ul>
+  </nav>
+</header>
+<hr class="site-header-bottom">
+
+  <div class="main" role="main">
+    <article class="article">
+      
+      
+      <h1 class="article-title">S3, Pt 1</h1>
+      
+      <hr class="article-title-bottom">
+      <ul class="article-meta">
+        <li class="article-meta-date"><time>August 21, 2019</time></li>
+      </ul>
+      
+      
+
+<h1 id="tldr">TLDR</h1>
+
+<h2 id="basic-operations">Basic Operations</h2>
+
+<ul>
+<li><a href="https://docs.aws.amazon.com/s3/">Purported Docs</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/s3/">CLI Docs</a></li>
+</ul>
+
+<h2 id="advanced-operations">Advanced Operations</h2>
+
+<ul>
+<li><a href="https://docs.aws.amazon.com/s3/">Purported Docs</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/s3api/">CLI Docs</a></li>
+</ul>
+
+<h2 id="job-operations">Job Operations</h2>
+
+<ul>
+<li><a href="https://docs.aws.amazon.com/s3/">Purported Docs</a></li>
+<li><a href="https://docs.aws.amazon.com/cli/latest/reference/s3control/">CLI Docs</a></li>
+</ul>
+
+<h1 id="intro">Intro</h1>
+
+<p>In the spirit of there being one, and only one, right way to do things, there are three different s3 cli namespaces.  Broadly, they are:</p>
+
+<ol>
+<li>Analogues of the basic unix operations, like <code>cp</code>, <code>ls</code>, <code>rm</code>, <code>mv</code>, and create/delete bucket.</li>
+<li>Everything else supported for s3 stuff, like acl policies, inventory policies, cors, encryption, etc.</li>
+<li>Batch operation CRUD ops.</li>
+</ol>
+
+<h2 id="high-level-overview">High level overview</h2>
+
+<p>s3 is a key-value store that looks like a filestore.  A bucket is a namespace that must be unique across all of s3.  Keys can look like /<code>mybucket/foo.png</code>, <code>mybucket/foo/bar/gif</code>, etc.</p>
+
+<h1 id="basic-operations-1">Basic Operations</h1>
+
+<p>In the spirit of the internet, our examples will all be moving cat gifs across the web.  Specifically, <code>cat-shaq-wiggles.gif</code>:</p>
+
+<p><img src="/cat-shaq-wiggles.gif" /></p>
+
+<h2 id="make-a-bucket">Make a bucket</h2>
+
+<p>Like last time:</p>
+
+<pre><code>$ aws s3 mb s3://betteraws-cat-gifs --profile s3user
+make_bucket: betteraws-cat-gifs
+</code></pre>
+
+<p>Note that I am using the user we gave s3 permissions last time.  From here, I will omit the profile argument by setting <code>AWS_DEFAULT_PROFILE=s3user</code></p>
+
+<p>Note also the <code>s3://</code>.  That prefix will be how we designate s3-side resources.</p>
+
+<h2 id="see-it-is-empty">See it is empty</h2>
+
+<pre><code>$ aws s3 ls s3://betteraws-cat-gifs
+$
+</code></pre>
+
+<p>(No output)</p>
+
+<h2 id="put-something-in-the-bucket-move-it-around">Put something in the bucket, move it around</h2>
+
+<pre><code>$ aws s3 mv cat-shaq-wiggles.gif s3://betteraws-cat-gifs
+move: ./cat-shaq-wiggles.gif to s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
+</code></pre>
+
+<pre><code>aws s3 ls s3://betteraws-cat-gifs
+2019-09-04 20:17:41    2028508 cat-shaq-wiggles.gif
+</code></pre>
+
+<p>🙌</p>
+
+<p>But wait, now our local copy is gone!  Let&rsquo;s get it back.</p>
+
+<pre><code>aws s3 cp s3://betteraws-cat-gifs/cat-shaq-wiggles .
+fatal error: An error occurred (404) when calling the HeadObject operation: Key &quot;cat-shaq-wiggles&quot; does not exist
+</code></pre>
+
+<p>The suffix is necessary on cp, so:</p>
+
+<pre><code>aws s3 cp s3://betteraws-cat-gifs/cat-shaq-wiggles.gif .
+download: s3://betteraws-cat-gifs/cat-shaq-wiggles.gif to ./cat-shaq-wiggles.gif
+$ ls
+cat-shaq-wiggles.gif
+</code></pre>
+
+<p>Mr. O&rsquo;Neil&rsquo;s time is expensive, so let&rsquo;s not make him wait on s3 for too long.</p>
+
+<pre><code>$ aws s3 rm s3://betteraws-cat-gifs/cat-shaq-wiggles
+delete: s3://betteraws-cat-gifs/cat-shaq-wiggles
+</code></pre>
+
+<p>but wait&hellip;</p>
+
+<pre><code>$ aws s3 ls s3://betteraws-cat-gifs
+2019-09-04 20:17:41    2028508 cat-shaq-wiggles.gif
+</code></pre>
+
+<p>While the delete <em>looks</em> like it succeeded, it definitely did not.  Actually get rid of it:</p>
+
+<p><code>
+$ aws s3 rm s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
+delete: s3://betteraws-cat-gifs/cat-shaq-wiggles.gif
+$ aws s3 ls s3://betteraws-cat-gifs
+$</code></p>
+
+<p>Why does the <code>cp</code> complain about a missing key, but the delete happily act like nothing is wrong?  Probably concurrency or something.  AWS is full of these kinds of behaviors to stub your toe on, so watch out.</p>
+
+    </article>
+
+    
+<ul class="article-share">
+  <li>
+    <a href="https://twitter.com/share" class="twitter-share-button">Tweet</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+  </li>
+  <li>
+    <div class="fb-share-button" data-href="https://bwarren2.github.io/betteraws/s3/" data-layout="button_count" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/ja_JP/sdk.js#xfbml=1&version=v2.10";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+  </li>
+  <li>
+    <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="en" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+  </li>
+  <li>
+    <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    <script>!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+  </li>
+</ul>
+
+    <div class="disqus-comments">
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "Shortname" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>
+
+    <ul class="pager article-pager">
+      <li class="pager-newer pager-noitem">&lt; Newer</li>
+      <li class="pager-older">
+        <a href="/betteraws/iam/" data-toggle="tooltip" data-placement="top" title="IAM">Older &gt;</a>
+      </li>
+    </ul>
+  </div>
+
+
+<div class="site-footer">
+  <div class="copyright">&copy; Copyright 2017 Your name</div>
+  <ul class="site-footer-items">
+    <li class="site-footer-item-about"><a href="/betteraws/about/" title="About">About</a></li>
+  </ul>
+  <div class="powerdby">
+    Powered by <a href="https://gohugo.io/">Hugo</a> and <a href="https://github.com/taikii/whiteplain">Whiteplain</a>
+  </div>
+</div>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'Toracking ID', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+</html>

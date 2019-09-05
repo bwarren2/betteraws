@@ -1,5 +1,5 @@
 ---
-title: "Iam"
+title: "IAM"
 date: 2019-08-14T19:38:47-04:00
 draft: false
 ---
@@ -98,7 +98,7 @@ As last time, call the Secure Token Service:
 
 🙌
 
-You can set which profile will be used when you don't specify one with the AWS_DEFAULT_PROFILE env var.
+You can set which profile will be used when you don't specify one with the `AWS_DEFAULT_PROFILE` env var.
 
 # User Permissions
 
@@ -119,7 +119,6 @@ and demonstrate a lack of permissions with
 $ aws s3 ls --profile s3user
 
 An error occurred (AccessDenied) when calling the ListBuckets operation: Access Denied
-[betteraws](master)$
 ```
 
 ## Create a policy
